@@ -14,6 +14,8 @@ install() {
 	mkdir "$DIR"
     fi
 
+    cd $DIR
+    
     cp $file $DIR
     tar -xvf $(basename "$file")
 
