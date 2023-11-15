@@ -15,7 +15,7 @@ install() {
     fi
 
     cp $file $DIR
-    tar -xvf $file
+    tar -xvf $(basename "$file")
 
     cd $DIR/$(basename "$file" .opm)
     echo "$(basename '$file' .opm)"
