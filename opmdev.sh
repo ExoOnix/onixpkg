@@ -17,8 +17,8 @@ install() {
     cp $file $DIR
     tar -xvf $(basename "$file")
 
-    cd $DIR/$(basename "$file" .opm)
-    echo "$(basename '$file' .opm)"
+    cd $DIR/$(basename $file .opm)
+    echo "$(basename $file .opm)"
 
     source config.sh
 
