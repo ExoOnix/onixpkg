@@ -5,6 +5,10 @@ DIR="/usr/opm"
 # Function to install
 install() {
     echo "Installing: $file"
+
+    file=$(realpath "$file")
+
+
     if [ ! -f "$file" ]; then
 	echo "$file not found"
 	exit 1
@@ -14,14 +18,25 @@ install() {
 	mkdir "$DIR"
     fi
 
+    cd $DIR
+    
     cp $file $DIR
-    tar -xvf $file
+    tar -xvf $(basename "$file")
 
-    cd $DIR/$(basename "$file" .opm)
-    echo "$(basename '$file' .opm)"
+    cd $DIR/$(basename $file .opm)
+    echo "$(basename $file .opm)"
+
+    source config.sh
+
+    # Delete config.sh
+    rm config.sh
+
+    
+    
     
     cp -R ./* /
 
+    echo "Installed $NAME"
 }
 
 # Function to uninstall
