@@ -5,6 +5,10 @@ DIR="/usr/opm"
 # Function to install
 install() {
     echo "Installing: $file"
+
+    file=$(realpath "$file")
+
+
     if [ ! -f "$file" ]; then
 	echo "$file not found"
 	exit 1
