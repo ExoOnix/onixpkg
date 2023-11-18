@@ -28,13 +28,24 @@ install() {
 
     source config.sh
 
+    mkdir "$DIR/Packages/$ALIAS"
+
+    cp pkgfiles "$DIR/Packages/$ALIAS"
+    cp config.sh "$DIR/Packages/$ALIAS"
+
     # Delete config.sh
     rm config.sh
+    rm pkgfiles
 
     
     
     
     cp -R ./* /
+
+    cd ../
+    rm $(basename "$file")
+    rm -rf $(basename $file .opm)
+    
 
     echo "Installed $NAME"
 }
