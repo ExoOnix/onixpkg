@@ -42,6 +42,11 @@ install() {
     
     cp -R ./* /
 
+    cd ../
+    rm $(basename "$file")
+    rm -rf $(basename $file .opm)
+    
+
     echo "Installed $NAME"
 }
 
