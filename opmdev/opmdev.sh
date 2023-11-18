@@ -28,8 +28,12 @@ install() {
 
     source config.sh
 
+    cp pkgfiles "$DIR/Packages/$ALIAS"
+    cp config.sh "$DIR/Packages/$ALIAS"
+
     # Delete config.sh
     rm config.sh
+    rm pkgfiles
 
     
     
