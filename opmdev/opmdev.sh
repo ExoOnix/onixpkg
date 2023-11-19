@@ -21,7 +21,7 @@ install() {
     cd $DIR
     
     cp $file $DIR
-    tar -xvf $(basename "$file")
+    tar --same-owner --preserve-permissions -xvf $(basename "$file")
 
     cd $DIR/$(basename $file .opm)
     echo "$(basename $file .opm)"
