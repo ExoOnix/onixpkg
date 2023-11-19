@@ -53,7 +53,32 @@ install() {
 # Function to uninstall
 uninstall() {
     echo "Uninstalling: $file"
-    # Add your uninstallation logic here
+    
+    # Check if the directory exists
+    if [ -d "$DIR/Packages/$file" ]; then
+        cd "$DIR/Packages/$file" || exit 1
+
+        # Read pkgfiles and delete files listed in it
+        while IFS= read -r line; do
+            if [ -f "$line" ]; then
+                rm "$line"
+                echo "Deleted: $line"
+            else
+                echo "File not found: $line"
+            fi
+        done < pkgfiles
+
+        # Return to the original directory
+        cd "$DIR/Packages" || exit 1
+
+        # Remove the directory
+        rm -rf "$file"
+        echo "Deleted directory: $DIR/$file"
+
+        echo "Uninstall complete for $file"
+    else
+        echo "Directory not found: $DIR/Packages/$file"
+    fi
 }
 
 # Check for the correct number of arguments
