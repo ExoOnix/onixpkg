@@ -83,7 +83,7 @@ uninstall() {
 
 # Check for the correct number of arguments
 if [ "$#" -lt 2 ]; then
-    echo "Usage: $0 [install|uninstall] <file>"
+    echo "Usage: $0 [install|uninstall] <file>/<name>"
     exit 1
 fi
 
@@ -104,6 +104,3 @@ case $option in
         exit 1
         ;;
 esac
-
-# Print the variable
-echo "File: $file"
