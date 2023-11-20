@@ -21,7 +21,7 @@ install() {
     cd $DIR
     
     cp $file $DIR
-    tar -xvf $(basename "$file")
+    tar --same-owner --preserve-permissions -xvf $(basename "$file")
 
     cd $DIR/$(basename $file .opm)
     echo "$(basename $file .opm)"
@@ -58,15 +58,22 @@ uninstall() {
     if [ -d "$DIR/Packages/$file" ]; then
         cd "$DIR/Packages/$file" || exit 1
 
-        # Read pkgfiles and delete files listed in it
-        while IFS= read -r line; do
-            if [ -f "$line" ]; then
-                rm "$line"
-                echo "Deleted: $line"
-            else
-                echo "File not found: $line"
-            fi
-        done < pkgfiles
+	while IFS= read -r line; do
+	    if [ -e "$line" ]; then
+	        if [ -d "$line" ]; then
+	            rm -r "$line"
+	            echo "Deleted directory: $line"
+	        elif [ -f "$line" ]; then
+	            rm "$line"
+	            echo "Deleted file: $line"
+	        else
+	            echo "Unknown type: $line"
+	        fi
+	    else
+	        echo "Not found: $line"
+	    fi
+	done < pkgfiles
+
 
         # Return to the original directory
         cd "$DIR/Packages" || exit 1
