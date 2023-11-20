@@ -102,14 +102,14 @@ uninstall() {
 
 # Check for the correct number of arguments
 if [ "$#" -lt 1 ]; then
-    echo "Usage: $0 [list|install|uninstall] <file>/<name>"
+    echo "Usage: $0 [list|install|uninstall] [file]/[package_name]"
     exit 1
 fi
 
-# Read the option and file
+# Read the option
 option=$1
-file=$2
 
+# Case statement for options
 case $option in
     list)
         if [ "$#" -ne 1 ]; then
