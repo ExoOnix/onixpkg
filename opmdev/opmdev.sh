@@ -61,7 +61,7 @@ uninstall() {
         # Read pkgfiles and delete files listed in it
         while IFS= read -r line; do
             if [ -f "$line" ]; then
-                rm "$line"
+                rm -rf "$line"
                 echo "Deleted: $line"
             else
                 echo "File not found: $line"
