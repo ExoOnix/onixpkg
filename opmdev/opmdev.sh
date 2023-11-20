@@ -112,12 +112,26 @@ file=$2
 
 case $option in
     list)
+        if [ "$#" -ne 1 ]; then
+            echo "Usage: $0 list"
+            exit 1
+        fi
         list_packages
         ;;
     install)
+        if [ "$#" -ne 2 ]; then
+            echo "Usage: $0 install <file>/<name>"
+            exit 1
+        fi
+        file=$2
         install
         ;;
     uninstall)
+        if [ "$#" -ne 2 ]; then
+            echo "Usage: $0 uninstall <file>/<name>"
+            exit 1
+        fi
+        file=$2
         uninstall
         ;;
     *)
