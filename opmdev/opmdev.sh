@@ -7,7 +7,7 @@ list_packages() {
     echo "Listing contents of $DIR/Packages:"
     
     if [ -d "$DIR/Packages" ]; then
-        ls -l "$DIR/Packages"
+        ls "$DIR/Packages"
     else
         echo "Directory not found: $DIR/Packages"
     fi
