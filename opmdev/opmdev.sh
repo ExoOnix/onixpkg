@@ -65,6 +65,16 @@ install_local() {
 install_web() {
     echo "Installing package $file through web"
 
+    echo "Checking if wget is installed."
+
+    if ! command -v wget &> /dev/null; then
+        echo "Error: wget is not installed. Please install wget."
+        exit 1
+    fi
+
+    echo "Wget check complete, continuing installation."
+
+
 }
 
 # Function to uninstall
