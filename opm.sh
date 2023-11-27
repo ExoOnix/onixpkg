@@ -2,6 +2,18 @@
 
 DIR="/usr/opm"
 
+
+list_packages() {
+    echo "Listing contents of $DIR/Packages:"
+    
+    if [ -d "$DIR/Packages" ]; then
+        ls "$DIR/Packages"
+    else
+        echo "Directory not found: $DIR/Packages"
+    fi
+}
+
+
 # Function to install
 install() {
     echo "Installing: $file"
@@ -89,25 +101,41 @@ uninstall() {
 }
 
 # Check for the correct number of arguments
-if [ "$#" -lt 2 ]; then
-    echo "Usage: $0 [install|uninstall] <file>/<name>"
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 [list|install|uninstall] [file]/[package_name]"
     exit 1
 fi
 
-# Read the option and file
+# Read the option
 option=$1
-file=$2
 
 # Case statement for options
 case $option in
+    list)
+        if [ "$#" -ne 1 ]; then
+            echo "Usage: $0 list"
+            exit 1
+        fi
+        list_packages
+        ;;
     install)
+        if [ "$#" -ne 2 ]; then
+            echo "Usage: $0 install <file>/<name>"
+            exit 1
+        fi
+        file=$2
         install
         ;;
     uninstall)
+        if [ "$#" -ne 2 ]; then
+            echo "Usage: $0 uninstall <file>/<name>"
+            exit 1
+        fi
+        file=$2
         uninstall
         ;;
     *)
-        echo "Invalid option: $option. Please use 'install' or 'uninstall'."
+        echo "Invalid option: $option. Please use 'list', 'install', or 'uninstall'."
         exit 1
         ;;
 esac
