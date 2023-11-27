@@ -15,7 +15,7 @@ list_packages() {
 
 
 # Function to install
-install() {
+install_local() {
     echo "Installing: $file"
 
     file=$(realpath "$file")
@@ -60,6 +60,11 @@ install() {
     
 
     echo "Installed $NAME"
+}
+
+install_web() {
+    echo "Installing package $file through web"
+
 }
 
 # Function to uninstall
@@ -124,7 +129,13 @@ case $option in
             exit 1
         fi
         file=$2
-        install
+
+        # Check if the file ends with ".opm"
+        if [[ "$file" == *.opm ]]; then
+            install_local
+        else
+            install_web
+        fi
         ;;
     uninstall)
         if [ "$#" -ne 2 ]; then
