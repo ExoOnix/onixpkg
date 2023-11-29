@@ -49,9 +49,9 @@ install_local() {
     rm config.sh
     rm pkgfiles
 
-    if [ "$(type -t PRE_INSTALL)" = 'function' ]; then
-        PRE_INSTALL
-    fi
+    
+    PRE_INSTALL
+    
     
     
     cp -R ./* /
@@ -59,10 +59,10 @@ install_local() {
     cd ../
     rm $(basename "$file")
     rm -rf $(basename $file .opm)
-
-    if [ "$(type -t PRE_INSTALL)" = 'function' ]; then
-        POST_INSTALL
-    fi
+    
+    
+    POST_INSTALL
+    
     
 
     echo "Installed $NAME"
