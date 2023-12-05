@@ -50,6 +50,8 @@ install_local() {
     rm pkgfiles
 
     
+    PRE_INSTALL
+    
     
     
     cp -R ./* /
@@ -57,6 +59,10 @@ install_local() {
     cd ../
     rm $(basename "$file")
     rm -rf $(basename $file .opm)
+    
+    
+    POST_INSTALL
+    
     
 
     echo "Installed $NAME"
