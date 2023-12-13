@@ -88,21 +88,17 @@ uninstall() {
     echo "Uninstalling: $file"
     
     # Check if the directory exists
-    if [ -e "$line" ]; then
-	
+    if [ -d "$DIR/Packages/$file" ]; then
         cd "$DIR/Packages/$file" || exit 1
 
 	while IFS= read -r line; do
-	    if [ -e "$line" ] || [ -L "$line" ]; then
+	    if [ -e "$line" ]; then
 	        if [ -d "$line" ]; then
 	            rm -rf "$line"
 	            echo "Deleted directory: $line"
 	        elif [ -f "$line" ]; then
 	            rm -rf "$line"
 	            echo "Deleted file: $line"
-	     	elif [ -L "$line" ]; then
-	            rm -rf "$line"
-	            echo "Deleted symbolic link: $line"
 	        else
 	            echo "Unknown type: $line"
 	        fi
