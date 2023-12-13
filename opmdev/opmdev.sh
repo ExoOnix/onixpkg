@@ -99,9 +99,6 @@ uninstall() {
 	        elif [ -f "$line" ]; then
 	            rm -rf "$line"
 	            echo "Deleted file: $line"
-	     	elif [ -L "$line" ]; then
-	            rm -rf "$line"
-	            echo "Deleted symbolic link: $line"
 	        else
 	            echo "Unknown type: $line"
 	        fi
