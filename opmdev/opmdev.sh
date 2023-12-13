@@ -92,13 +92,16 @@ uninstall() {
         cd "$DIR/Packages/$file" || exit 1
 
 	while IFS= read -r line; do
-	    if [ -e "$line" ]; then
+	    if [ -e "$line" ] || [ -L "$line" ]; then
 	        if [ -d "$line" ]; then
 	            rm -rf "$line"
 	            echo "Deleted directory: $line"
 	        elif [ -f "$line" ]; then
 	            rm -rf "$line"
 	            echo "Deleted file: $line"
+	        elif [ -L "$line" ]; then
+	            rm -rf "$line"
+	            echo "Deleted symlink: $line"
 	        else
 	            echo "Unknown type: $line"
 	        fi
