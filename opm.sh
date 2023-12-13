@@ -94,10 +94,10 @@ uninstall() {
 	while IFS= read -r line; do
 	    if [ -e "$line" ]; then
 	        if [ -d "$line" ]; then
-	            rm -r "$line"
+	            rm -rf "$line"
 	            echo "Deleted directory: $line"
 	        elif [ -f "$line" ]; then
-	            rm "$line"
+	            rm -rf "$line"
 	            echo "Deleted file: $line"
 	        else
 	            echo "Unknown type: $line"
