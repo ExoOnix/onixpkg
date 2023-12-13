@@ -88,8 +88,8 @@ uninstall() {
     echo "Uninstalling: $file"
     
     # Check if the directory exists
-    if [ -e "$line" ] || [ -L "$line" ]; then
-
+    if [ -e "$line" ]; then
+	
         cd "$DIR/Packages/$file" || exit 1
 
 	while IFS= read -r line; do
